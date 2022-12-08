@@ -3,9 +3,7 @@ const express = require('express');
 const handleAllRequests = (requestObject, responseObject) => {
   console.log("Hello, a request just came through");
   const url = requestObject.url;
-  //incase of html challenge : responseObject.setHeader ("content-type","text/html");
-  responseObject.write ("<h1>Page not found</h1>");
- 
+  //incase of html challenge : responseObject.setHeader ("content-type","text/html"); 
   responseObject.end("");
 }
 
@@ -37,6 +35,11 @@ const handleServicesRequest = (req, res) => {
   res.send("<h1>Enjoy our services</h1>");
 }
 
+const handleErrorRequest = (req, res) => {
+  res.send("<h1>Page not found</h1>")
+}
+
+
 const server = express();
 server.use('/about', handleAboutRequest);
 server.use('/gallery', handleGalleryRequest);
@@ -45,6 +48,7 @@ server.use('/login', handleLoginRequest);
 server.use('/signup', handleSignupRequest);
 server.use('/profile', handleProfileRequest);
 server.use('/', handleHomeRequest);
+server.use('*', handleErrorRequest);
 server.use(handleAllRequests);
 
 server.listen(3000, '127.0.0.1', ()=>{console.log("Request received, wait for response")});
