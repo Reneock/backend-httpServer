@@ -1,5 +1,5 @@
 const express = require('express');
-const server = express();
+const server = express('server');
 
 //handling request methods
 const handleEveryRequest = (req, res) => {res.send("Response from server.use");}
@@ -44,4 +44,4 @@ server.get('/login', loginRouteSpecificMiddleware, handleLoginRequest);
 server.put('/profile',profileRouteSpecificMiddleware, handleProfileRequest);
 server.use('/',homeRouteSpecificMiddleware, handleHomeRequest);
 
-server.listen(3000, () => {console.log("Request received, wait for response")});
+server.listen(3000, () => console.log("Request received, wait for response"));
