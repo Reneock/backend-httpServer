@@ -1,47 +1,25 @@
 const express = require('express');
-const server = express();
+const path = require('path');
+const server = express('server');
 
-//handling request methods
-const handleEveryRequest = (req, res) => {res.send("Response from server.use");}
-const handleLoginRequest = (req, res) => {res.send("Welcome back, login now");}
-const handleProfileRequest = (req, res) => {res.send("Create your profile");}
-const handleHomeRequest = (req, res) => {res.send("<h1>This is the home Page</h1>");}
+//middleware definitions
+server.use(express.static(path.join(__dirname, 'public')));
+// const serveHomePage = (req, res) =>{
+//   //res.send('Welcome to the home Page');
+//   //finding the file
+//   const homepageFilePath = path.join(__dirname, 'public', 'index.html');
+//   //sending the file
+//   res.sendFile(homepageFilePath);
+// }
 
-//introducing middleware
-const middlewareFunction = (req, res, next) => {
-  console.log ("introducing middleware");
-  //checking for mistakes
-  next();
-}
+// const serveProfilePage = (req, res) =>{
+//   const profilepageFilePath = path.join(__dirname, 'public', 'profile.html');
+//   res.sendFile(profilepageFilePath);
+// }
 
-//handling specific middleware
-const generalRouteSpecificMiddleware = (req, res, next) => {
-  console.log ("general route middleware executed");
-  next();
-}
+//route definitions
+// server.get('/', serveHomePage);
+// server.get('/profile', serveProfilePage);
+//nb css doesn't work with maual approach. the above commented is manual
 
-const loginRouteSpecificMiddleware = (req, res, next) => {
-  console.log ("login route middleware executed");
-  next();
-}
-
-const profileRouteSpecificMiddleware = (req, res, next) => {
-  console.log ("profile route middleware executed");
-  next();
-}
-
-const homeRouteSpecificMiddleware = (req, res, next) => {
-  console.log ("home route middleware executed");
-  next();
-}
-
-//generalmiddleware
-server.use(middlewareFunction);
-
-//handling server methods(routes)
-server.post('/general',generalRouteSpecificMiddleware, handleEveryRequest);
-server.get('/login', loginRouteSpecificMiddleware, handleLoginRequest);
-server.put('/profile',profileRouteSpecificMiddleware, handleProfileRequest);
-server.use('/',homeRouteSpecificMiddleware, handleHomeRequest);
-
-server.listen(3000, () => {console.log("Request received, wait for response")});
+server.listen(3000, () => console.log("Request received, wait for response"));
