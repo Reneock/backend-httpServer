@@ -20,7 +20,7 @@ const loginRequestHandler = (req, res) => {
 }
 //middleware definitions
 server.use(express.static(path.join(__dirname, 'public')));
-server.use(bodyParser.urlencoded({extended: false}))
+server.use(bodyParser.urlencoded({extended: false}));
 
 //route 
 server.post('/login', loginRequestHandler);
