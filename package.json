@@ -1,12 +1,17 @@
 {
-  "name": "http_server",
+  "name": "bankserver",
   "version": "1.0.0",
-  "description": "A server with http package",
+  "description": "This server helps you to manage your bank accounts",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ."
   },
+  "keywords": [
+    "Bank",
+    "Account",
+    "Server"
+  ],
   "author": "Irene",
   "license": "ISC",
   "dependencies": {
