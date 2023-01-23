@@ -1,23 +1,19 @@
-//import express, body-parser, needed files
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const {listBanksController, createBankController, updateBankController, deleteBankController} = require('./controllers');
 
-//create express server instance
 const server = express('server');
 
-//middlewares
 server.use(bodyParser.json());
 
-//routes
-//view banks - get method
-server.get('/bank', listBanksController);
-//create bank - post method
-server.post('/bank', createBankController);
-//update bank - put method
-server.put('/bank', updateBankController);
-//delete bank - delete method
-server.delete('/bank', deleteBankController);
+ server.get('/bank/:id?', listBanksController);
+ server.post('/bank', createBankController);
+// server.put('/bank', updateBankController);
+// server.delete('/bank', deleteBankController);
 
-//start server
-server.listen(3000, () => console.log("bank server started"));
+mongoose.connect("mongodb+srv://virtualClassUser:lMw0zRtkPJXtzWuY@cluster0.0o28abb.mongodb.net/VirtualClass?retryWrites=true&w=majority"
+//{ useNewUrlParser: true, useUnifiedTopology: true}
+).then(result =>{
+  server.listen(3000, () => console.log("bank server started"));
+}).catch(err => console.log(err));

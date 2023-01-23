@@ -1,49 +1,14 @@
-let banksDb = require('./db');
+const mongoose = require('mongoose');
 
-//bank model
-class BankModel {
-  constructor({name, location, branch, phone, address, accountNumber}){
-    this.name = name;
-    this.location = location;
-    this.branch = branch;
-    this.phone = phone;
-    this.address = address;
-    this.accountNumber = accountNumber;
-  }
+const BankSchema = mongoose.Schema({
+  name: String,
+  location: String,
+  branch: String,
+  phone: String,
+  address: String,
+  accountNumber: String
+});
 
-  save(){
-    banksDb.push(this);
-    return this;
-  }
-
-  static all(){
-    return banksDb;
-  }
-
-  static update(updateInfo = {}){
-    banksDb = banksDb.map(bank => {
-      if(bank.name === updateInfo.name){
-        return {...bank, ...updateInfo};
-      }
-      return bank;
-    });
-  }
-
-  static delete({name}){
-
-    let deletedBank = null;
-
-    banksDb = banksDb.filter(bank => {
-      if (bank.name !== name) {
-        return true;
-      }
-      deletedBank = bank;
-      return false;
-    });
-
-    return deletedBank;
-  }
-
-}
+const BankModel = mongoose.model("Bank", BankSchema);
 
 module.exports = BankModel;
