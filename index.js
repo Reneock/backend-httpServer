@@ -1,18 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const {listBanksController, createBankController, updateBankController, deleteBankController, createAccountController, listAccountController} = require('./controllers');
+const accountRoutes = require('./routes/account');
+const bankRoutes = require('./routes/bank');
 
 const server = express('server');
 
 server.use(bodyParser.json());
 
-server.get('/bank/:id?', listBanksController);
-server.post('/bank', createBankController);
-server.put('/bank', updateBankController);
-server.delete('/bank', deleteBankController);
-server.post('/account', createAccountController);
-server.get('/account', listAccountController);
+//routes
+server.use(accountRoutes);
+server.use(bankRoutes);
 
 mongoose.set("strictQuery", false);
 mongoose.connect("mongodb+srv://virtualClassUser:lMw0zRtkPJXtzWuY@cluster0.0o28abb.mongodb.net/VirtualClass?retryWrites=true&w=majority"
