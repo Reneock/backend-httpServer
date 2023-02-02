@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const accountRoutes = require('./routes/account');
 const bankRoutes = require('./routes/bank');
+const userRoutes = require('./routes/user');
 
 const server = express('server');
 
@@ -11,6 +12,7 @@ server.use(bodyParser.json());
 //routes
 server.use(accountRoutes);
 server.use(bankRoutes);
+server.use(userRoutes);
 
 mongoose.set("strictQuery", false);
 mongoose.connect("mongodb+srv://virtualClassUser:lMw0zRtkPJXtzWuY@cluster0.0o28abb.mongodb.net/VirtualClass?retryWrites=true&w=majority"
